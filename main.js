@@ -19,15 +19,20 @@ retrieveDeck();
 
 
 //Async function to draw five cards from the deck api
-async function drawCards(deckId) {
+async function shuffleAndDrawCards(deckId) {
+
+    //Shuffle the deck from the ApiUrl before drawing
+    const shuffleUrl = `${ApiUrl}/${deckId}/shuffle/`;
+    const shuffleResponse = await fetch(shuffleUrl);
 
     //Drawing 5 cards from the ApiUrl with the associated deckId
     const drawUrl = `${ApiUrl}/${deckId}/draw/?count=5`;
-    const response = await fetch(drawUrl);
-    const handData = await response.json();
+    const drawResponse = await fetch(drawUrl);
+    const handData = await drawResponse.json();
     const hand = handData.cards;
 
+    //Show the cards delt in the console
     console.log("Hand delt: ", hand);
 };
 //Call the drawCards function
-drawCards(deckId);
+shuffleAndDrawCards(deckId);
