@@ -31,8 +31,21 @@ async function shuffleAndDrawCards(deckId) {
     const handData = await drawResponse.json();
     const hand = handData.cards;
 
+    //Display image of the cards delt
+    const cardImagesContainer = document.getElementById("cardImages");
+    cardImagesContainer.innerHTML = ""; //Clearing teh previous card images displayed
+
+    hand.forEach(card => {
+        const cardImage = document.createElement("img");
+        cardImage.src = card.image;
+        cardImagesContainer.appendChild(cardImage);
+    })
+
     //Show the cards delt in the console
     console.log("Hand delt: ", hand);
 };
-//Call the drawCards function
-shuffleAndDrawCards(deckId);
+//Event listener for shuffle and deal button
+document.getElementById('shuffleAndDeal').addEventListener('click', () => {
+    //Call drawCards function after button is clicked
+    shuffleAndDrawCards(deckId);
+});
