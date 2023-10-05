@@ -8,4 +8,12 @@ async function retrieveDeck() {
     const cardData = await response.json();
     deckId = cardData.deck_id;
 
+    //Store the deckId in localStorage using .setItem
+    localStorage.setItem('deckId', deckId);
+
+    //Show the deck id in the console.
+    console.log("Retrieved deck_id: ", deckId);
 };
+
+//Call the retrieveDeck function
+retrieveDeck();
