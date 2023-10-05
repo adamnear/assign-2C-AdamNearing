@@ -49,3 +49,16 @@ document.getElementById('shuffleAndDeal').addEventListener('click', () => {
     //Call drawCards function after button is clicked
     shuffleAndDrawCards(deckId);
 });
+
+
+//Determining all possible poker hands
+function determinePokerHand(cards) {
+    //Organize the cards to be in rank from high to low
+    cards.sort((a, b) => {
+        const rankA = getCardRankValue(a);
+        const rankB = getCardRankValue(b);
+        return rankB - rankA;
+    });
+
+
+}
