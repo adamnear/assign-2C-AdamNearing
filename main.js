@@ -60,5 +60,27 @@ function determinePokerHand(cards) {
         return rankB - rankA;
     });
 
+    //These are the possible poker hands, from highest value to lowest value
+    if (isRoyalFlush(cards)) {
+        return "Royal Flush";
+    } else if (isStraightFlush(cards)) {
+        return "Straight Flush";
+    } else if (isFourOfAKind(cards)) {
+        return "Four of a Kind";
+    } else if (isFullHouse(cards)) {
+        return "Full House";
+    } else if (isFlush(cards)) {
+        return "Flush";
+    } else if (isStraight(cards)) {
+        return "Straight";
+    } else if (isThreeOfAKind(cards)) {
+        return "Three of a Kind";
+    } else if (isTwoPair(cards)) {
+        return "Two Pair";
+    } else if (isOnePair(cards)) {
+        return "One Pair";
+    } else {
+        return "High Card";
+    }
 
 }
