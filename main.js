@@ -89,6 +89,11 @@ function determinePokerHand(cards) {
     }
 }
 
+//function to assign value to non-numeric cards (face cards)
+function getCardRankValue(card) {
+    const rank = card.value;
+}
+
 function isRoyalFlush(cards) {
     //Check for a royal flush
 }
