@@ -1,10 +1,10 @@
-const ApiUrl = 'https://deckofcardsapi.com/api/deck';
+const apiUrl = 'https://deckofcardsapi.com/api/deck';
 let deckId = localStorage.getItem('deckId');
 
 //Async Fetch the cards from the API and store as cardData
 async function retrieveDeck() {
 
-    const response = await fetch(`${ApiUrl}/new`);
+    const response = await fetch(`${apiUrl}/new`);
     const cardData = await response.json();
     deckId = cardData.deck_id;
 
@@ -17,29 +17,34 @@ async function retrieveDeck() {
 //Call the retrieveDeck function
 retrieveDeck();
 
-
 //Async function to draw five cards from the deck api
 async function shuffleAndDrawCards(deckId) {
 
-    //Shuffle the deck from the ApiUrl before drawing
-    const shuffleUrl = `${ApiUrl}/${deckId}/shuffle/`;
+    //Shuffle the deck from the apiUrl before drawing
+    const shuffleUrl = `${apiUrl}/${deckId}/shuffle/`;
     const shuffleResponse = await fetch(shuffleUrl);
 
-    //Drawing 5 cards from the ApiUrl with the associated deckId
-    const drawUrl = `${ApiUrl}/${deckId}/draw/?count=5`;
+    //Drawing 5 cards from the apiUrl with the associated deckId
+    const drawUrl = `${apiUrl}/${deckId}/draw/?count=5`;
     const drawResponse = await fetch(drawUrl);
     const handData = await drawResponse.json();
     const hand = handData.cards;
 
     //Display image of the cards delt
     const cardImagesContainer = document.getElementById("cardImages");
-    cardImagesContainer.innerHTML = ""; //Clearing teh previous card images displayed
+    const outputCardDetails = document.getElementById("cardDetails");
+
+    cardImagesContainer.innerHTML = ""; //Clearing the previous card images displayed
+    let outputHTML = "";
 
     hand.forEach(card => {
         const cardImage = document.createElement("img");
+        outputHTML += `<h3>${card.value} of ${card.suit}</h3>`;
         cardImage.src = card.image;
         cardImagesContainer.appendChild(cardImage);
-    })
+    });
+
+    outputCardDetails.innerHTML = outputHTML;//The card number and value sent to HTML
 
     //Show the cards delt in the console
     console.log("Hand delt: ", hand);
@@ -82,5 +87,36 @@ function determinePokerHand(cards) {
     } else {
         return "High Card";
     }
+}
 
+function isRoyalFlush(cards) {
+    //Check for a royal flush
+}
+
+function isStraightFlush(cards) {
+    //Check for a straight flush
+}
+
+function isFourOfAKind(cards) {
+    //Check for four of a kind
+}
+
+function isFullHouse(cards) {
+    //Check for a full house
+}
+
+function isFlush(cards) {
+    //Check for a flush
+}
+
+function isStraight(cards) {
+    //Check for a Stright
+}
+
+function isTwoPair(cards) {
+    //Check for a two pair
+}
+
+function isOnePair(cards) {
+    //Check for a one pair
 }
