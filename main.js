@@ -158,7 +158,16 @@
 
         for (const card of sortedCards) {
             const rank = card.value;
+
+            rankCounts[rank] = (rankCounts[rank] || 0) + 1;
         }
+
+        const uniqueCardValues = Object.keys(rankCounts); //This holds the unique card values that were counted in sortedCards array
+
+        if (uniqueCardValues.length === 2 && (rankCounts[uniqueCardValues[0] === 3 || rankCounts[uniqueCardValues[1]]] === 3)) {
+            return true; // If there are exactly two different ranks and one of them appears three times, it's a full house
+        }
+        return false;
     }
 
     function isFlush(sortedCards) {
