@@ -184,8 +184,11 @@
     function isStraight(sortedCards) {
         //Check for a Stright
         for (let i = 1; i < sortedCards.length; i++) {
-
+            if (getCardRankValue(sortedCards[i - 1]) !== getCardRankValue(sortedCards[i]) + 1) {//Checking if the next card is one value higher then previous
+                return false; //If the next card in hand is not a sequence to the last card, if not a straight
+            }
         }
+        return true;
     }
 
     function isTwoPair(sortedCards) {
