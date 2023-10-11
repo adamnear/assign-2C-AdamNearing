@@ -175,7 +175,7 @@
         const firstSuit = sortedCards[0].suit; //The suit of the first card will have to be the same for all cards
 
         if (sortedCards.every(card => card.suit === firstSuit)) {//Check that the following cards are same suit
-            return true;
+            return true;// All cards have the same suit, indicating a flush
         } else {
             return false;
         }
@@ -183,6 +183,9 @@
 
     function isStraight(sortedCards) {
         //Check for a Stright
+        for (let i = 1; i < sortedCards.length; i++) {
+
+        }
     }
 
     function isTwoPair(sortedCards) {
