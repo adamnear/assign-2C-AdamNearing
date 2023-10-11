@@ -174,7 +174,11 @@
         //Check for a flush
         const firstSuit = sortedCards[0].suit; //The suit of the first card will have to be the same for all cards
 
-        return sortedCards.every(card => card.suit === firstSuit) //Check that the following cards are same suit
+        if (sortedCards.every(card => card.suit === firstSuit)) {//Check that the following cards are same suit
+            return true;
+        } else {
+            return false;
+        }
     }
 
     function isStraight(sortedCards) {
