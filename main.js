@@ -49,13 +49,24 @@
 
         //Show the cards delt in the console
         console.log("Hand delt: ", hand);
+
+        // After drawing the cards, determine the poker hand and display it
+        const pokerHand = determinePokerHand(hand);
+        displayPokerHandResult(pokerHand);
+        console.log("Poker hand: ", result);
     };
+
+    // Function to display the poker hand result on the page
+    function displayPokerHandResult(result) {
+        const pokerHandElement = document.getElementById("pokerHand");
+        pokerHandElement.textContent = "Poker Hand: " + result;
+    }
+
     //Event listener for shuffle and deal button
     document.getElementById('shuffleAndDeal').addEventListener('click', () => {
         //Call drawCards function after button is clicked
         shuffleAndDrawCards(deckId);
     });
-
 
     //Determining all possible poker hands
     function determinePokerHand(cards) {
@@ -105,7 +116,7 @@
         let firstSuit = null;
 
         for (const card of sortedCards) { //Loop through each card in the cards array
-            if (validCards.includes(card.charAt(0))) { //Checking if the card rank is in validCards
+            if (validCards.includes(card.value)) { //Checking if the card rank is in validCards
                 if (firstSuit === null) { //firstSuit will be the standard suit
                     firstSuit = card.charAt(1); //Taking the second character (the suit) of the card string 
                 } else if (firstSuit !== card.charAt(1)) { //firstSuit is not equal to current card
@@ -191,11 +202,52 @@
         return true;
     }
 
+    function isThreeOfAKind(sortedCards) {
+        // Check for three of a kind
+        const rankCounts = {}; // Object to count the frequency of each rank value
+
+        for (const card of sortedCards) {
+            const rank = card.value;
+
+            rankCounts[rank] = (rankCounts[rank] || 0) + 1;
+
+            if (rankCounts[rank] === 3) {
+                return true; // Checking if the same rank (value) appears 3 times
+            }
+        }
+
+        return false;
+    }
+
     function isTwoPair(sortedCards) {
         //Check for a two pair
+        const rankCounts = {}; //Object to count the frequency of each rank value
+
+        for (const card of sortedCards) {
+            const rank = card.value;
+
+            rankCounts[rank] = (rankCounts[rank] || 0) + 1;
+        }
+
+        const counts = Object.values(rankCounts);
+        const pairCount = counts.filter(count => count === 2).length;
+
+        return pairCount === 2;
     }
 
     function isOnePair(sortedCards) {
         //Check for a one pair
+        const rankCounts = {}; //Object to count the frequency of each rank value
+
+        for (const card of sortedCards) {
+            const rank = card.value;
+
+            rankCounts[rank] = (rankCounts[rank] || 0) + 1;
+        }
+
+        const counts = Object.values(rankCounts);
+        const pairCount = counts.filter(count => count === 2).length;
+
+        return pairCount === 1;
     }
 })();
