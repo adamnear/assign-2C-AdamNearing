@@ -19,7 +19,7 @@
     retrieveDeck();
 
     //Async function to draw five cards from the deck api
-    async function shuffleAndDrawCards(deckId) {
+    async function shuffleAndDrawCards(deckId, sortedCards) {
 
         //Shuffle the deck from the apiUrl before drawing
         const shuffleUrl = `${apiUrl}/${deckId}/shuffle/`;
@@ -51,7 +51,7 @@
         console.log("Hand delt: ", hand);
 
         // After drawing the cards, determine the poker hand and display it
-        const pokerHand = determinePokerHand(hand);
+        const pokerHand = determinePokerHand(handData.cards);
         displayPokerHandResult(pokerHand);
         console.log("Poker hand: ", result);
     };
@@ -218,6 +218,7 @@
 
         return false;
     }
+
 
     function isTwoPair(sortedCards) {
         //Check for a two pair
